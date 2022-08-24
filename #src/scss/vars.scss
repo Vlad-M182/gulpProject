@@ -1,0 +1,104 @@
+@use 'sass:math';
+
+@mixin font($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url('../fonts/#{$file_name}.woff') format('woff'),
+			url('../fonts/#{$file_name}.woff2') format('woff2');
+		font-weight: $weight;
+		font-style: $style;
+	}
+}
+
+$content-width: 1200;
+
+//=============================================
+$main-font: '';
+$main-font-weight: 400;
+
+$second-font: '';
+//=============================================
+$md1: 320;
+$md2: 480;
+$md3: 768;
+$md4: 992;
+//=============================================
+$white: #ffffff;
+$black: #000000;
+
+//=============================================
+
+@mixin all-titles($family, $color, $line-height, $weight) {
+	.title1,
+	.title2,
+	.title3,
+	.title4,
+	.title5,
+	.title6 {
+		font-family: $family;
+		color: $color;
+		line-height: $line-height;
+		@if $weight == 0 {
+			font-weight: inherit;
+		} @else {
+			font-weight: $weight;
+		}
+	}
+}
+
+@mixin title($size, $min-size) {
+	font-size: #{$size + px};
+	@media (max-width: #{$content-width + px}) {
+		font-size: calc(
+			#{$min-size + px} + (#{$size} - #{$min-size}) * ((100vw - 320px) /
+						(#{$content-width} - 320))
+		);
+	}
+}
+
+@mixin block-text($textColor, $lineHeight, $fontSize, $parMarginBottom) {
+	.block-text {
+		color: $textColor;
+		line-height: $lineHeight;
+		font-size: $fontSize;
+	}
+	.block-text p:not(:last-child) {
+		margin-bottom: $parMarginBottom;
+	}
+}
+
+@mixin adaptive-style($property, $initial-size, $min-size) {
+	#{$property}: #{$initial-size + px};
+	@media (max-width: #{$content-width + px}) {
+		#{$property}: calc(
+			#{$min-size + px} + (#{$initial-size} - #{$min-size}) * ((100vw - 320px) /
+						(#{$content-width} - 320))
+		);
+	}
+}
+
+// TO %
+@function prc($pxOne, $pxTwo) {
+	$result: math.div($pxOne, $pxTwo) * 100%;
+	@return $result;
+}
+
+// REM
+@function rem($px) {
+	$result: math.div($px, 16) + rem;
+	@return $result;
+}
+
+// EM
+@function em($px) {
+	$result: math.div($px, 16) + em;
+	@return $result;
+}
+
+//=============================================
+//адаптивні властивості
+// calc(min + (initial - min) * ((100vw - 320px) / (container - 320)))
+// calc(#{$min-size + px} + (#{$size} - #{$min-size}) * ((100vw - 320px) / (#{$content-width} - 320)));
+
+//@include block-text(#000, 1.5, 10px);

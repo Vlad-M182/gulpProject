@@ -1,0 +1,31 @@
+@import 'vars';
+@import 'fonts';
+@import 'nullstyle';
+
+//====Глобальні стилі=========
+
+:root {
+	--white: #ffffff;
+	--black: #000000;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100%;
+}
+[class*='__container'] {
+	max-width: rem($content-width + 30);
+	margin: 0 auto;
+	padding: 0 15px;
+}
+.main {
+	flex: 1 1 auto;
+}
+
+//============================
+
+@import 'header';
+@import 'main';
+@import 'footer';
