@@ -57,8 +57,6 @@ const { src, dest, watch, parallel, series } = require('gulp'),
 	clean_css = require('gulp-clean-css'),
 	//згрупувати всі @media
 	group_media = require('gulp-group-css-media-queries'),
-	//мініфікувати скрипти
-	uglify = require('gulp-uglify-es').default,
 	//ковертувати картинки у webp
 	webp = require('gulp-webp'),
 	//зжати всі картинки
